@@ -1,2 +1,2 @@
-const path = require("path");
-console.log(path.parse(__filename));
+const os = require("os");
+if (os.totalmem() > os.freemem()) return console.log("j");
