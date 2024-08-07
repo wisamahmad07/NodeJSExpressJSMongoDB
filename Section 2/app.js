@@ -1,3 +1,2 @@
-const log = require("./logger");
-
-log("helo world");
+const path = require("path");
+console.log(path.parse(__filename));
