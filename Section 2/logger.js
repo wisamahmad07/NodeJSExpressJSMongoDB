@@ -1,13 +1,9 @@
-// exports, require, module, __filename, __dirname are scope to this module
+const EventEmitter = require("events");
 
-console.log(__filename);
+const emitter = new EventEmitter();
 
-// implementation detail (no export)
-url = "http://logger.io/log";
-
-function logger(message) {
-  //...
-  console.log(message);
-}
+const logger = emitter.on("post", (arg) => {
+  console.log(`message is logged ${arg.id} ${arg.name}`);
+});
 
 module.exports = logger;
