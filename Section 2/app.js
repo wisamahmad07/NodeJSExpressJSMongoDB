@@ -1,3 +1,7 @@
-const log = require("./logger");
+const Logger = require("./logger");
+const logger = new Logger();
 
-log.emit("post", { id: 1, name: "Mosh" });
+logger.on("post", (args) => {
+  console.log(args);
+});
+logger.log("helo");
