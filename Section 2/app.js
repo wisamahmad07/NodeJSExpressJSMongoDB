@@ -1,7 +1,17 @@
-const Logger = require("./logger");
-const logger = new Logger();
+const http = require("http");
 
-logger.on("post", (args) => {
-  console.log(args);
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    console.log(req.socket);
+    console.log("listeining inside");
+    res.end();
+  }
+  if (req.url === "/api/course") {
+    res.write(JSON.stringify(["Mosh", "Wisam", "Maaz"]));
+    res.end();
+  }
 });
-logger.log("helo");
+
+server.listen(1000);
+
+console.log("listening start");
