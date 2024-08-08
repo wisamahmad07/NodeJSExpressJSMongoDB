@@ -1,8 +1,13 @@
-const _ = require("underscore");
+//VERSION
 
-// core node module
-// file underscore.js or folder underscore/index.js
-// node_modules
+//SEMANTIC VERSIONING
+// ^ caret character     ~ tilde
 
-const result = _.contains([1, 2, 3], 2);
-console.log(result);
+// "1.2.3"
+// 1 is major change or feature that breaks previous version functionality
+// 2 is minor change or new feature added that does not break prevous functionality or enhancement in previous
+// 3 is patch means fix some bug in version
+
+// "^1.2.3" means 1.x
+// "~1.2.3" means 1.2.x
+// "1.2.3" means 1.2.3
