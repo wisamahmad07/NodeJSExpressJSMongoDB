@@ -24,3 +24,8 @@
 
 //------------------------------------------------------------
 // npm i mongoose@2.4.2
+
+//-----------------------------------------------------------
+// npm outdated to get whose version is not latest
+// npm update to update 1.x
+// to install latest check latest from npm outdated and then npm i mongoose@latest
