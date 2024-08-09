@@ -32,3 +32,5 @@
 
 //-----------------------------------------------------------------
 // npm i mongoose --save-dev    it means it is only development dependency
+//------------------------------------------------------------------
+// npm un mongoose to uninstall package
