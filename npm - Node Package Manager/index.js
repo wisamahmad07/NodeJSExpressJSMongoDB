@@ -21,3 +21,6 @@
 // npm view mongoose
 // npm view mongoose dependencies
 // npm view mongoose versions
+
+//------------------------------------------------------------
+// npm i mongoose@2.4.2
