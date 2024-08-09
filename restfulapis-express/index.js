@@ -26,3 +26,10 @@ app.get("/api/courses/:id", (req, res) => {
 
 const port = process.env.port || 3000;
 app.listen(port, () => console.log(`listening on ${port}...`));
+
+//-----------------------------------------------------
+// for multiple params or sorting
+// app.get("/api/posts/:year/:month", (req, res) => {
+//    res.send(req.params);
+//    res.send(req.query);
+// });
