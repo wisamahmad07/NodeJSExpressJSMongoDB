@@ -16,3 +16,8 @@
 //How to check dependencies of app
 // npm list
 // npm i to install all if you remove node_modules or just get app from git
+
+//------------------------------------------------------
+// npm view mongoose
+// npm view mongoose dependencies
+// npm view mongoose versions
