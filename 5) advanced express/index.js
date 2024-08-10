@@ -11,6 +11,9 @@ const express = require("express");
 // const authentication = require("./middleware/authentication");
 const app = express();
 
+app.set("view engine", "pug");
+app.set("views", "./views");
+
 // console.log(`node_env is ${process.env.NODE_ENV}`);
 // console.log(`appget is ${app.get("env")}`);
 
@@ -38,7 +41,7 @@ const courses = [
 ];
 
 app.get("/", (req, res) => {
-  res.send("<h1>Hello world !!!wx</h1>");
+  res.render("index", { name: "wisam" });
 });
 
 app.get("/api/courses", (req, res) => {
