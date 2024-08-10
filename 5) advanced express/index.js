@@ -1,38 +1,49 @@
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-// const startupDebugger = require("debug")("app:startup");
-// const dbDebugger = require("debug")("app:db");
 // const config = require("config");
 const Joi = require("joi");
+const express = require("express");
+// const startupDebugger = require("debug")("app:startup");
+// const dbDebugger = require("debug")("app:db");
 // const helmet = require("helmet");
 // const morgan = require("morgan");
-const express = require("express");
 // const logging = require("./middleware/logging");
 // const authentication = require("./middleware/authentication");
 const app = express();
 
-app.set("view engine", "pug");
-app.set("views", "./views");
-
-// console.log(`node_env is ${process.env.NODE_ENV}`);
-// console.log(`appget is ${app.get("env")}`);
-
-// console.log(`config name | ${config.get("name")}`);
-// console.log(`config host | ${config.get("host.mail")}`);
-// console.log(`config password | ${config.get("host.password")}`);
-
 app.use(express.json());
+//----------------------------------------------------------
+/* Lecture 3 custom middleware */
+// app.use(logging);
+// app.use(authentication);
+//----------------------------------------------------------
+/* Lecture 4 Buildin middleware */
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.static("public"));
+//----------------------------------------------------------
+/* Lecture 5 Third party middleware */
 // app.use(helmet());
 // if (app.get("env") === "development") {
 //   app.use(morgan("tiny"));
 //   startupDebugger("in dev");
 // }
+//----------------------------------------------------------
+/* Lecture 6 Environments */
+// console.log(`node_env is ${process.env.NODE_ENV}`);
+// console.log(`appget is ${app.get("env")}`);
+//----------------------------------------------------------
+/* Lecture 7 Configuration */
+// console.log(`config name | ${config.get("name")}`);
+// console.log(`config host | ${config.get("host.mail")}`);
+// console.log(`config password | ${config.get("host.password")}`);
+//----------------------------------------------------------
+/* Lecture 8 Debugging */ //******************* startupDebugger used in Lecture 5
 // dbDebugger("connect to db");
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.static("public"));
-// app.use(logging);
-// app.use(authentication);
+//----------------------------------------------------------
+/* Lecture 9 Template Engines */ //******************* render in get("/")
+// app.set("view engine", "pug");
+// app.set("views", "./views");
+//----------------------------------------------------------
 
 const courses = [
   { id: 1, name: "courses1" },
