@@ -1,22 +1,27 @@
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
+const config = require("config");
 const Joi = require("joi");
-const helmet = require("helmet");
-const morgan = require("morgan");
+// const helmet = require("helmet");
+// const morgan = require("morgan");
 const express = require("express");
 // const logging = require("./middleware/logging");
 // const authentication = require("./middleware/authentication");
 const app = express();
 
-console.log(`node_env is ${process.env.NODE_ENV}`);
-console.log(`appget is ${app.get("env")}`);
+// console.log(`node_env is ${process.env.NODE_ENV}`);
+// console.log(`appget is ${app.get("env")}`);
+
+console.log(`config name | ${config.get("name")}`);
+console.log(`config host | ${config.get("host.mail")}`);
+console.log(`config password | ${config.get("host.password")}`);
 
 app.use(express.json());
-app.use(helmet());
-if (app.get("env") === "development") {
-  app.use(morgan("tiny"));
-  console.log("in dev");
-}
+// app.use(helmet());
+// if (app.get("env") === "development") {
+//   app.use(morgan("tiny"));
+//   console.log("in dev");
+// }
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.static("public"));
