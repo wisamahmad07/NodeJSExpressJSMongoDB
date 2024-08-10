@@ -1,14 +1,18 @@
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const Joi = require("joi");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const express = require("express");
 // const logging = require("./middleware/logging");
 // const authentication = require("./middleware/authentication");
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(helmet());
+app.use(morgan("tiny"));
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.static("public"));
 // app.use(logging);
 // app.use(authentication);
 
