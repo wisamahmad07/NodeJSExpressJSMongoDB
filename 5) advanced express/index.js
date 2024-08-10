@@ -2,14 +2,15 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const Joi = require("joi");
 const express = require("express");
-const logging = require("./middleware/logging");
-const authentication = require("./middleware/authentication");
+// const logging = require("./middleware/logging");
+// const authentication = require("./middleware/authentication");
 const app = express();
 
 app.use(express.json());
-
-app.use(logging);
-app.use(authentication);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+// app.use(logging);
+// app.use(authentication);
 
 const courses = [
   { id: 1, name: "courses1" },
