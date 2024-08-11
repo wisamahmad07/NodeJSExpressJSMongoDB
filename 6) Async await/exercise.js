@@ -9,21 +9,22 @@
 //     });
 //   }
 // });
-async function fun() {
+
+async function customertoEmail() {
   try {
     const customer = await getCustomer(1);
     console.log("Customer: ", customer);
     if (customer.isGold) {
       const movies = await getTopMovies();
       console.log("Top movies: ", movies);
-      const email = await sendEmail(customer.email);
+      await sendEmail(customer.email);
       console.log("Email sent...");
     }
-  } catch (Err) {
-    console.log(Err);
+  } catch (err) {
+    console.log(err);
   }
 }
-fun();
+customertoEmail();
 
 function getCustomer(id) {
   return new Promise((resolve, reject) => {
@@ -34,7 +35,7 @@ function getCustomer(id) {
         isGold: true,
         email: "email",
       });
-    }, 2000);
+    }, 4000);
   });
 }
 
@@ -42,14 +43,14 @@ function getTopMovies() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(["movie1", "movie2"]);
-    }, 2000);
+    }, 4000);
   });
 }
 
-function sendEmail(email, movies) {
+function sendEmail(email, movies, callback) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
-    }, 2000);
+    }, 4000);
   });
 }
