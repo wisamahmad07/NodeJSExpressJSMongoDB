@@ -36,6 +36,14 @@ async function getCourse() {
   //  [logical operators]```or - and
   // .find().or([{author: "wisam"},{isPublished:false}])
   // .and([{author: "wisam"},{isPublished:false}]) --> this is like passing in find({})
+
+  //  [js-regular express or regex] [starts with -> /^.../] - [ends with -> /...$/] - [case insensitive -> /.../i]
+  // starts with Mosh
+  // .find({author: /^Mosh/})
+  // ends with Hamedani
+  // .find({author: /Hamedani$/i})
+  // contains Mosh
+  // .find({author: /.*Mosh..*/i})
   const courses = await Course.find({ author: "wisam" })
     .sort({ name: -1 })
     .limit(2)
