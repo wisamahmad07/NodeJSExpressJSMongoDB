@@ -26,7 +26,14 @@ async function createCourseDocument() {
 
   const result = await course.save();
   console.log(result);
-  mongoose.disconnect();
 }
 
-createCourseDocument();
+async function getCourse() {
+  const courses = await Course.find({ author: "wisam" })
+    .sort({ name: -1 })
+    .limit(2)
+    .select({ name: 1 });
+  console.log(courses);
+}
+
+getCourse();
