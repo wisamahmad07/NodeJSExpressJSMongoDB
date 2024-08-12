@@ -44,10 +44,15 @@ async function getCourse() {
   // .find({author: /Hamedani$/i})
   // contains Mosh
   // .find({author: /.*Mosh..*/i})
+
+  // counting
+  // to all counts in db -> .find().countDocuments()
+  // to filtering and then count -> .find({ author: "wisam" }).countDocuments()
   const courses = await Course.find({ author: "wisam" })
     .sort({ name: -1 })
-    .limit(2)
-    .select({ name: 1 });
+    .limit()
+    .select({ name: 1 })
+    .countDocuments();
   console.log(courses);
 }
 
