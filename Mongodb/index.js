@@ -29,6 +29,9 @@ async function createCourseDocument() {
 }
 
 async function getCourse() {
+  //   [comparison operators]eq - ne - gt - gte - lt - lte - in - nin
+  // .find({price : {$gt :10 , $lte :10}})
+  // .find({ price: { $in: [10, 20, 30] } })
   const courses = await Course.find({ author: "wisam" })
     .sort({ name: -1 })
     .limit(2)
