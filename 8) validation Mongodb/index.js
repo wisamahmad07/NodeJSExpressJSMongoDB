@@ -9,12 +9,26 @@ const courseSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: 5,
-    maxlength: 255,
+    // minlength: 3,
+    // maxlength: 255,
+    trim: true,
     /* match: /pattern/, */
   },
   author: String,
-  tags: {type: Array,validate: {validator: function (v) {return v && v.length > 0;},message: "Enter atleast 1 tag",},
+  tags: {
+    type: Array,
+    validate: {
+      validator: async function (v) {
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            const result = v && v.length > 0;
+            console.log("result", result);
+            resolve(result);
+          }, 3000)
+        );
+      },
+      message: "Enter atleast 1 tag",
+    },
   },
   date: {
     type: String,
@@ -40,7 +54,7 @@ const Course = mongoose.model("Course", courseSchema);
 // build-in validations
 async function createCourse2() {
   const course = new Course({
-    name: "react",
+    name: "hellow world",
     author: "wisam",
     tags: ["web"],
     isPublished: true,
