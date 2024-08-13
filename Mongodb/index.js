@@ -62,16 +62,32 @@ async function getCourse() {
   console.log(courses);
 }
 //---------------------------------------------------------------------------------------------------------------
-async function updateCourse(id) {
-  const course = await Course.findById(id);
-  console.log(course);
-
-  if (!course) return;
-  course.name = "sherwan ahmad";
-  course.author = "utility course";
-
-  const result = await course.save();
+async function updateCourseQueryFirst(id) {
+  const result = await Course.updateOne(
+    { _id: id },
+    {
+      $set: {
+        name: "wisam",
+        author: "ahmad",
+        isPublished: false,
+      },
+    }
+  );
   console.log(result);
 }
 
-updateCourse("66b9e85a929f1e92554e5b1a");
+async function updateCourseUpdateFirst(id) {
+  const course = await Course.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        name: "maaz",
+        author: "ahmad",
+      },
+    },
+    { new: true }
+  );
+  console.log(course);
+}
+
+updateCourseUpdateFirst("66b9e85a929f1e92554e5b1a");
