@@ -89,5 +89,10 @@ async function updateCourseUpdateFirst(id) {
   );
   console.log(course);
 }
-
-updateCourseUpdateFirst("66b9e85a929f1e92554e5b1a");
+async function deleteCourse(id) {
+  // const deletedResult = await Course.deleteOne({ _id: id });
+  const deletedCourse = await Course.findByIdAndDelete(id);
+  if (!deletedCourse) return console.log("course not found");
+  console.log(deletedCourse);
+}
+deleteCourse("66b9e8e1d0fb6d9e6adab513");
