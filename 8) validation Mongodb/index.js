@@ -14,14 +14,15 @@ const courseSchema = new mongoose.Schema({
     /* match: /pattern/, */
   },
   author: String,
-  tags: [String],
+  tags: {type: Array,validate: {validator: function (v) {return v && v.length > 0;},message: "Enter atleast 1 tag",},
+  },
   date: {
     type: String,
     default: Date.now,
   },
   category: {
     type: String,
-    // required: true,
+    required: true,
     enum: ["web", "mobile", "network"],
   },
   isPublished: Boolean,
@@ -41,7 +42,7 @@ async function createCourse2() {
   const course = new Course({
     name: "react",
     author: "wisam",
-    tags: ["react", "typescript"],
+    tags: ["web"],
     isPublished: true,
     price: 14,
     category: "web",
