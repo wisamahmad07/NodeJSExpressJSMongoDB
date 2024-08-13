@@ -43,7 +43,7 @@ async function getCourse() {
   // ends with Hamedani
   // .find({author: /Hamedani$/i})
   // contains Mosh
-  // .find({author: /.*Mosh..*/i})
+  // .find({author: /.*Mosh.*/i})
 
   // counting
   // to all counts in db -> .find().countDocuments()
