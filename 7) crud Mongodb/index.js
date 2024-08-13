@@ -95,4 +95,4 @@ async function deleteCourse(id) {
   if (!deletedCourse) return console.log("course not found");
   console.log(deletedCourse);
 }
-deleteCourse("66b9e8e1d0fb6d9e6adab513");
+// deleteCourse("66b9e8e1d0fb6d9e6adab513");
