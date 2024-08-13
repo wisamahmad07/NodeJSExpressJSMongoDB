@@ -16,6 +16,7 @@ const courseSchema = new mongoose.Schema({
   isPublished: Boolean,
 });
 const Course = mongoose.model("Course", courseSchema);
+//-------------------------------------------------------------------------------
 async function createCourseDocument() {
   const course = new Course({
     name: "react course",
@@ -27,7 +28,7 @@ async function createCourseDocument() {
   const result = await course.save();
   console.log(result);
 }
-
+//----------------------------------------------------------------------------------------
 async function getCourse() {
   //   [comparison operators]```eq - ne - gt - gte - lt - lte - in - nin
   // .find({price : {$gt :10 , $lte :10}})
@@ -60,5 +61,17 @@ async function getCourse() {
     .countDocuments();
   console.log(courses);
 }
+//---------------------------------------------------------------------------------------------------------------
+async function updateCourse(id) {
+  const course = await Course.findById(id);
+  console.log(course);
 
-getCourse();
+  if (!course) return;
+  course.name = "sherwan ahmad";
+  course.author = "utility course";
+
+  const result = await course.save();
+  console.log(result);
+}
+
+updateCourse("66b9e85a929f1e92554e5b1a");
