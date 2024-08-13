@@ -12,24 +12,30 @@ const courseSchema = new mongoose.Schema({
     // minlength: 3,
     // maxlength: 255,
     trim: true,
+    uppercase: true,
+    // lowercase:true,
     /* match: /pattern/, */
   },
-  author: String,
+  author: { type: String, required: true },
   tags: {
     type: Array,
     validate: {
-      validator: async function (v) {
+      validator: function (v) {
+        return v && v.length > 0;
+      },
+      /* validator: async function (v) {
         await new Promise((resolve) =>
           setTimeout(() => {
             const result = v && v.length > 0;
             console.log("result", result);
             resolve(result);
-          }, 3000)
+          }, 3000) 
         );
-      },
-      message: "Enter atleast 1 tag",
+        */
     },
+    message: "Enter atleast 1 tag",
   },
+
   date: {
     type: String,
     default: Date.now,
@@ -47,6 +53,8 @@ const courseSchema = new mongoose.Schema({
     },
     min: 3,
     max: 1000,
+    get: (v) => Math.round(v), // when fetching from db it round first and then display
+    set: (v) => Math.round(v), // when feeding data to db it round first and then feed
   },
 });
 const Course = mongoose.model("Course", courseSchema);
@@ -54,8 +62,8 @@ const Course = mongoose.model("Course", courseSchema);
 // build-in validations
 async function createCourse2() {
   const course = new Course({
-    name: "hellow world",
-    author: "wisam",
+    // name: "hellow world",
+    // author: "wisam",
     tags: ["web"],
     isPublished: true,
     price: 14,
@@ -64,8 +72,10 @@ async function createCourse2() {
   try {
     const result = await course.save();
     console.log(result);
-  } catch (error) {
-    console.log(error.message);
+  } catch (ex) {
+    for (field in ex.errors) {
+      console.log(ex.errors[field].properties);
+    }
   }
 }
 createCourse2();
