@@ -1,3 +1,4 @@
+const { Genre, validateSchema } = require("../model/genre");
 const express = require("express");
 const router = express.Router();
 
