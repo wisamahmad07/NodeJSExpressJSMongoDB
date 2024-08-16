@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const { error, value } = validateSchema(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  let genre = new Genre({ name: req.body.name });
+  let genre = new Genre({ name: req.body.name, abc: req.body.abc });
   genre = await genre.save();
   res.status(201).send({ message: `${genre.name} successfully added`, genre });
 });

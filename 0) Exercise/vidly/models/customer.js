@@ -30,9 +30,7 @@ function validateCustomers(customer) {
   const schema = Joi.object({
     name: Joi.string().required().min(5).max(50),
     isGold: Joi.boolean(),
-    phone: Joi.string()
-      .required()
-      .pattern(/^\d{11}$/),
+    phone: Joi.string().max(11).min(11).required(),
   });
   return schema.validate(customer);
 }
