@@ -8,9 +8,16 @@ router.get("/", async (req, res) => {
     return res.status(404).send("Error in finding your customers");
   res.send(customers);
 });
+// let id = "";
+// let timestamp = "";
 router.get("/:id", async (req, res) => {
   const customer = await Customer.findById(req.params.id);
   if (!customer) return res.status(404).send("Customer not found");
+  // id = customer._id;
+  // timestamp = id.getTimestamp();
+  // console.log("time", timestamp);
+  // console.log("id", id.toString());
+
   res.send(customer);
 });
 router.post("/", async (req, res) => {
