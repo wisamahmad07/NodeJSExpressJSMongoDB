@@ -11,6 +11,8 @@ app.use(express.json());
 app.use("/api/courses", courses);
 app.use("/", home);
 
+console.log(process.env.app_password);
+
 const port = process.env.port || 3000;
 app.listen(port, () => console.log(`listening on ${port}...`));
 
