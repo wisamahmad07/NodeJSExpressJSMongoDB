@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
@@ -10,6 +12,10 @@ const auth = require("./routes/auth");
 const express = require("express");
 const app = express();
 
+if (!process.env.jwtPrivateKey) {
+  console.log("FATAL ERROR");
+  process.exit(1);
+}
 mongoose
   .connect("mongodb://localhost:27017/vidly")
   .then(() => console.log("Connected to MongoDB..."))

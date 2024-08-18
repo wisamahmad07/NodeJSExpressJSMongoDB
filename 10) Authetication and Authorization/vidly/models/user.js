@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
@@ -25,7 +28,9 @@ const userSchema = new mongoose.Schema({
     maxlength: 255,
   },
 });
-
+userSchema.methods.generateAuthToken = function () {
+  return jwt.sign({ id: this._id, name: this.name }, process.env.jwtPrivateKey);
+};
 const User = mongoose.model("User", userSchema);
 
 function validateUser(user) {
