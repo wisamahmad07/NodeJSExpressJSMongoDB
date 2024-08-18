@@ -1,5 +1,6 @@
 const { User, validate } = require("../models/user");
 const _ = require("lodash");
+const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 
@@ -27,6 +28,9 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+
     user = await user.save();
     res.status(201).send({
       name: user.name,
@@ -38,8 +42,8 @@ router.post("/", async (req, res) => {
     //   message: `User added successfully`,
     // });
   } catch (error) {
-    console.log("error occured", error);
-    res.status(500).send("internal server error", error);
+    console.log("error occured");
+    res.status(500).send("internal server error");
   }
 });
 
