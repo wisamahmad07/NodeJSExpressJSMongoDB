@@ -1,8 +1,7 @@
-const { User, validate } = require("../models/user");
-const _ = require("lodash");
+const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
 const express = require("express");
-const { valid } = require("joi");
+const Joi = require("joi");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
