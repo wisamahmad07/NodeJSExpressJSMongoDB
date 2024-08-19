@@ -1,5 +1,5 @@
-const dotenv = require("dotenv");
-dotenv.config({ path: "./.env" });
+// const dotenv = require("dotenv");
+// dotenv.config({ path: "./.env" });
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const Joi = require("joi");
@@ -27,9 +27,16 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     maxlength: 255,
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
 });
 userSchema.methods.generateAuthToken = function () {
-  return jwt.sign({ id: this._id, name: this.name }, process.env.jwtPrivateKey);
+  return jwt.sign(
+    { id: this._id, isAdmin: this.isAdmin },
+    process.env.jwtPrivateKey
+  );
 };
 const User = mongoose.model("User", userSchema);
 
@@ -38,6 +45,7 @@ function validateUser(user) {
     name: Joi.string().required().min(3).max(50),
     email: Joi.string().required().min(5).max(50).email(),
     password: Joi.string().required().min(8).max(50),
+    isAdmin: Joi.boolean(),
   });
   return schema.validate(user);
 }
