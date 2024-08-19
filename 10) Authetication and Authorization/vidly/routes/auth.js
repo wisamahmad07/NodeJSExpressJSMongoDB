@@ -1,13 +1,11 @@
-const dotenv = require("dotenv");
-dotenv.config({ path: "./.env" });
-const jwt = require("jsonwebtoken");
+const auth = require("../middleware/auth");
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
 const express = require("express");
 const Joi = require("joi");
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { error, value } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
