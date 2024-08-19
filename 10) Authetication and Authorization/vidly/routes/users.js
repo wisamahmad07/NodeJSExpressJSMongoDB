@@ -1,4 +1,5 @@
 const { User, validate } = require("../models/user");
+const autherizationOrPermission = require("../middleware/auth");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const express = require("express");
@@ -9,8 +10,8 @@ router.get("/", async (req, res) => {
   if (!users) return res.status(404).send("Error in finding users");
   res.send(users);
 });
-router.get("/:id", async (req, res) => {
-  const user = await User.findById(req.params.id);
+router.get("/me", autherizationOrPermission, async (req, res) => {
+  const user = await User.findById(req.user.id).select("-password");
   if (!user) return res.status(404).send("user not found");
 
   res.send(user);
