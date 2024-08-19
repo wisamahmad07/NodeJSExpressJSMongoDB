@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 const error = require("./middleware/error");
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
