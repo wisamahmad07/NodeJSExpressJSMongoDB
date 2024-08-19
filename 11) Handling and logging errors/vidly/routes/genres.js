@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const genres = await Genre.find().sort("name");
     res.send(genres);
   } catch (ex) {
-    res.status(500).send("Internal Server Error");
+    next(ex);
   }
 });
 router.get("/:id", async (req, res) => {
