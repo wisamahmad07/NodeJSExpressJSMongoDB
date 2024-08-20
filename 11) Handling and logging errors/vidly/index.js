@@ -1,4 +1,5 @@
 require("express-async-errors");
+const logger = require("./configuration/logger");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const error = require("./middleware/error");
@@ -18,6 +19,7 @@ if (!process.env.jwtPrivateKey) {
   console.log("FATAL ERROR");
   process.exit(1);
 }
+
 mongoose
   .connect("mongodb://localhost:27017/vidly")
   .then(() => console.log("Connected to MongoDB..."))
@@ -30,7 +32,7 @@ app.use("/api/genres", genres);
 app.use("/api/customers", customers);
 app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
-app.use(error);
+app.use(error(logger));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
