@@ -21,11 +21,20 @@ if (!process.env.jwtPrivateKey) {
 }
 
 process.on("uncaughtException", (ex) => {
-  console.log("something faild during startup");
+  console.log("something failed during because of Error");
+  logger.info(ex.message, {
+    meta: { message: ex.message, name: ex.name, stack: ex.stack },
+  });
+});
+process.on("unhandledRejection", (ex) => {
+  console.log("something failed because of Promise Rejection");
   logger.info(ex.message, {
     meta: {
+      message: ex.message,
+      name: ex.name,
       stack: ex.stack,
-      ex,
+      //ex for db only
+      // ex: [ex.stack, ex.message, ex.name],
     },
   });
 });
@@ -35,7 +44,9 @@ mongoose
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB..."));
 
-throw new Error("index error he bhai sahab");
+// throw new Error("Unhandled Error Exception");
+const p = Promise.reject(new Error("Unhandled Promise Rejection"));
+p.then((ex) => console.log(ex));
 
 app.use(express.json());
 app.use("/api/users", users);
