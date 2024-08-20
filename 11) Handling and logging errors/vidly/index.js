@@ -20,10 +20,22 @@ if (!process.env.jwtPrivateKey) {
   process.exit(1);
 }
 
+process.on("uncaughtException", (ex) => {
+  console.log("something faild during startup");
+  logger.info(ex.message, {
+    meta: {
+      stack: ex.stack,
+      ex,
+    },
+  });
+});
+
 mongoose
   .connect("mongodb://localhost:27017/vidly")
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB..."));
+
+throw new Error("index error he bhai sahab");
 
 app.use(express.json());
 app.use("/api/users", users);
