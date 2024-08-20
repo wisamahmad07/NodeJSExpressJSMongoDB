@@ -9,7 +9,12 @@ module.exports = winston.createLogger({
   ),
   transports: [
     new winston.transports.File({ filename: "uncaughtExceptionErrors.log" }),
-    new winston.transports.Console(),
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.json()
+      ),
+    }),
     new winston.transports.MongoDB({
       db: "mongodb://localhost:27017/vidly",
       collection: "uncaughtExceptionErrors",
