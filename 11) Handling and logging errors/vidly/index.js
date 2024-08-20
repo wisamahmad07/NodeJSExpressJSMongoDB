@@ -5,8 +5,8 @@ const app = express();
 
 require("./startup/ErrorsLogging")();
 require("./startup/routes")(app);
-require("./startup/database")();
 require("./startup/config")();
+require("./startup/database")();
 
 // throw new Error("Unhandled Error Exception");
 // const p = Promise.reject(new Error("Unhandled Promise Rejection"));
