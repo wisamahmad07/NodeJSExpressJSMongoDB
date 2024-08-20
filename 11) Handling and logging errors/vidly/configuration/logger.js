@@ -1,4 +1,5 @@
 const winston = require("winston");
+require("winston-mongodb");
 
 module.exports = winston.createLogger({
   level: "info",
@@ -9,5 +10,14 @@ module.exports = winston.createLogger({
   transports: [
     new winston.transports.File({ filename: "logfile.log" }),
     new winston.transports.Console(),
+    new winston.transports.MongoDB({
+      db: "mongodb://localhost:27017/vidly",
+      options: { useUnifiedTopology: true },
+      metaKey: "meta",
+      format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json()
+      ),
+    }),
   ],
 });
