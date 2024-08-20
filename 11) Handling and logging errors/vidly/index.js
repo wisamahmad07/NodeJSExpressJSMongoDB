@@ -1,3 +1,4 @@
+require("express-async-errors");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const error = require("./middleware/error");
