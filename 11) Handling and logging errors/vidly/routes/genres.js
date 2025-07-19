@@ -13,7 +13,7 @@ const router = express.Router();
   })
 ); */
 router.get("/", async (req, res) => {
-  throw new Error("could not find genres");
+  // throw new Error("could not find genres");
   const genres = await Genre.find().sort("name");
   res.send(genres);
 });
@@ -27,7 +27,12 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
+  console.log(req.body);
+
   const { error, value } = validateGenre(req.body);
+  console.log(error);
+  console.log(value);
+
   if (error) return res.status(400).send(error.details[0].message);
   let genre = new Genre({ name: req.body.name, abc: req.body.abc });
   genre = await genre.save();
